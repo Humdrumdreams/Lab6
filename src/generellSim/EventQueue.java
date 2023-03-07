@@ -1,4 +1,4 @@
-package generellSim;
+package Lab6.generellSim;
 
 import java.util.ArrayList;
 
