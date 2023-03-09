@@ -8,13 +8,13 @@ public class EventQueue {
 	private String eventNamn;
 	private ArrayList<Event> händelseKö;
 	
-	public EventQueue(int eventtid, String eventNamn, ArrayList<Event> händelseKö) {
-		this.eventTid = eventtid;
+	public EventQueue(int eventTid, String eventNamn, ArrayList<Event> händelseKö) {
+		this.eventTid = eventTid;
 		this.eventNamn = eventNamn;
 		this.händelseKö = händelseKö;
 	}
 	
-	public int getEventtid() {
+	public int getEventTid() {
 		return this.eventTid;
 	}
 	

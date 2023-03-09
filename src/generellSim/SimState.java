@@ -1,4 +1,4 @@
-package generellSim;
+package Lab6.generellSim;
 
 import java.util.Observable;
 
@@ -9,7 +9,7 @@ public class SimState extends Observable{
 		
 		while (!avslutaProgram) {
 			// Programmet körs
-			if (/* något händer*/) {
+			if (0 ==0) {
 				avslutaProgram = true;
 				setChanged();
 				notifyObservers();

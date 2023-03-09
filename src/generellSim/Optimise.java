@@ -1,12 +1,12 @@
-package generellSim;
+package Lab6.generellSim;
 
 public class Optimise {
-	public metod1() { //TODO
+	public void metod1() { //TODO
 		//Köra metoden som klassenRunSim. 
 		return; //returnera sluttillståndet från RunSim
 	}
 	
-	public metod2() { //TODO
+	public void metod2() { //TODO
 		//Skapa en upprepning av metod1, sannolikt rekursion, för metod1()
 		//Ta hänsyn till frön. 
 		
@@ -14,7 +14,7 @@ public class Optimise {
 				//minimerar antal missade kunder.
 	}
 	
-	public metod3() { //TODO
+	public void metod3() { //TODO
 		//Köra metod2()= fler agånger med givna parametrar men med olika frön. Tar
 		//frö f som argument och har en variabel av typen random som refererar till
 		//slumptalskällan new Random(f)
