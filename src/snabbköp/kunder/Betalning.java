@@ -5,23 +5,21 @@ import Lab6.generellSim.EventQueue;
 import Lab6.snabbköp.Snabbköp;
 import Lab6.snabbköp.SnabbköpState;
 
-public class Betalning extends Event{
+public class Betalning extends KundHändelse{
 	int tid;
-	SnabbköpState state;
-	Snabbköp snabbköp;
-	EventQueue eQ;
-	public Betalning(SnabbköpState state, Snabbköp snabbköp, EventQueue eQ) {
-		super(state, snabbköp, eQ);
-		this.state = state;
-		this.eQ = eQ;
-	}
+	int ID;
+	public Betalning(SnabbköpState state, EventQueue eQ, double tid, Kund kund) { super(state, eQ, tid, kund); }
 	
 	@Override
-	public void createEvent(double lambda, long seed, int kundID) {
-		int kButik = state.getAntalKunderIButik();
-		state.setAntalKunderIButik(kButik-1);
-		int lKassor = state.getAntalLedigaKassor();
-		state.setAntalLedigaKassor(lKassor+1);
-		state.setAntalKunderSomHandlat();
+	public void createEvent() {
+		state.minskaAntalKunderIButik();
+		state.ökaAntalLedigaKassor();
+		state.ökaAntalKunderSomHandlat();
+		if (state.getKassaKöFIFO().size() > 0) {
+			eQ.addEvent(new Betalning(state, eQ, state.getBetalningsTid(), state.getKassaKöFIFO().getFirst()));
+		}
 	}
+
+	@Override
+	public String getName() { return "Betalning"; }
 }

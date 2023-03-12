@@ -1,10 +1,10 @@
 package Lab6.generellSim;
 
-public abstract class SimView {
-	
-	public abstract void update();
+import java.util.Observable;
+import java.util.Observer;
 
-	public void printUt() { //TODO S
-		
-	}
+public abstract class SimView implements Observer{
+	
+	public abstract void update(Observable o, Object e);
+
 }

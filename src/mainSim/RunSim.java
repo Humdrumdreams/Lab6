@@ -1,86 +1,35 @@
 package Lab6.mainSim;
 
-import java.util.ArrayList;
-import Lab6.generellSim.Event;
 import Lab6.generellSim.EventQueue;
-import Lab6.snabbköp.Snabbköp;
+import Lab6.snabbköp.Run;
 import Lab6.snabbköp.SnabbköpState;
-import Lab6.snabbköp.kunder.*;
-
-/**
- * This class runs the events created by the Event class in the order set by the EventQueue class. 
- * 
- * @author Ludvig Lidén, Botan Guzel, Sergij Wennström
- */
+import Lab6.snabbköp.SnabbköpView;
+import Lab6.snabbköp.Stop;
+import Lab6.snabbköp.kunder.Ankomst;
+import Lab6.snabbköp.kunder.Kund;
+import Lab6.generellSim.Sim;
 
 public class RunSim {
+	SnabbköpState state;
+	EventQueue eQ;
+	Sim sim;
 	
-	/**
-	 * A variable for the maximum people who are allowwed inside the 
-	 */
-	public static int maxAntal = 100;	
+	public RunSim(double startTid, double stopTid, double closeTid, double lambda, double kMin,
+			double kMax, double pMin, double pMax, long seed, int maxKunder, int maxKassor) {
+		this.eQ = new EventQueue();
+		this.state = new SnabbköpState(maxKunder, maxKassor, lambda, seed, kMin, kMax, pMin, pMax);
+		this.eQ.addEvent(new Run(state, eQ, startTid));
+		Kund kund = new Kund();
+		this.eQ.addEvent(new Ankomst(state, eQ, state.getAnkomstTid(), kund));
+		this.eQ.addEvent(new Stop(state, eQ, stopTid));
+		SnabbköpView view = new SnabbköpView(state, eQ);
+		state.addObserver(view);
+		sim = new Sim(eQ, state, state);
+		sim.körHändelser();
+	}
 	
-	/**
-	 * The main method which will run the program.
-	 * @param args 
-	 */
 	public static void main(String[] args) {
-		
-		/**
-		 * Creates an ArrayList object named eventList.
-		 */
-		ArrayList<Event> eventList = new ArrayList<Event>();
-
-		/**
-		 * Creates an eventqueue object eQ. That takes the variables 
-		 * (eventTid, eventNamn and händelseKö) as input.
-		 */
-		EventQueue eQ = new EventQueue(20, "test", eventList); //what is meant by eventList
-		
-		/**
-		 * Creates an ArrayList object namede kundList. 
-		 */
-		ArrayList<KundID> kundList = new ArrayList<KundID>();
-		
-		/**
-		 * Creates a SnabbköpState object named state.
-		 */
-		SnabbköpState state = new SnabbköpState();
-		
-		/**
-		 * Creates a Snabbköp object named Snabbköp. Takes 4 parameters as input. 
-		 */
-		Snabbköp sk = new Snabbköp(true, state, kundList, eQ);
-		
-		/**
-		 * Calls the method in Snabbköp for creating the first customer. The first 
-		 * customer will then lead to the first
-		 */
-		sk.skapaFörstaKund();
-		
-		for (int i = 0; i< sk.kundList.size(); i++) {
-			System.out.println("kund:\t" + sk.kundList.toArray()[i]);
-			
-			KundID förstaKund = sk.kundList.get(0);
-			förstaKund.create();
-			
-			EventQueue a = sk.getEQ();
-			System.out.println(a.getHändelseKö());
-		}
-		
-		/*KundID kID = new KundID();
-		kID.kundList.clear();
-		Snabbkop ss = new Snabbkop();
-		
-		ss.setSnabbköpÖppet(true);
-		ss.setAntalKunderIButik(1);
-		
-		SnabbkopState sss = new SnabbkopState();
-		Ankomst ankomst = new Ankomst(sss );
-		
-		ankomst.createEvent(12, 1234);
-		System.out.println("\t"+sss.getTidAnkomst());
-*/
+		RunSim rSim = new RunSim(0, 10.00, 999, 1.0, 2.0, 3.0, .5, 1.0, 1234, 5, 2);
 	}
 
 }

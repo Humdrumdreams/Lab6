@@ -3,8 +3,12 @@ import Lab6.generellSim.EventQueue;
 import Lab6.snabbköp.kunder.*;
 import java.util.LinkedList;
 
-public class KassaKöFIFO extends LinkedList{
+public class KassaKöFIFO extends LinkedList<Kund>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	EventQueue eQ;
 	SnabbköpState state;
 	
@@ -13,20 +17,18 @@ public class KassaKöFIFO extends LinkedList{
 		this.state = state;
 	}
 	@Override
-	public boolean add(Object e) {
-		this.add(0, e);
+	public boolean add(Kund e) {
+		this.add(-1, e);
 		return true;
 	}
-	
-	public void removeFirst(Object e) {
-		this.removeFirst();
+	public Kund removeFirst() {
+		return this.removeFirst();
 	}
 	
 	public void ordnaKö() {
 		if (state.getAntalLedigaKassor() != 0) {
 			this.removeFirst();
-			int ledKassor = state.getAntalLedigaKassor();
-			state.setAntalLedigaKassor(ledKassor-1);
+			state.minskaAntalLedigaKassor();
 		}
 	}
 }

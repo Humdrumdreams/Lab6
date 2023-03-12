@@ -3,17 +3,27 @@ package Lab6.generellSim;
 import java.util.Observable;
 
 public class SimState extends Observable{
+	private double time;
+	private boolean io; //Öppet eller stängd
 	
-	public void runSimulation() { //kolla över denna
-		boolean avslutaProgram = false;
+	
+	public SimState() { this.setIo(true); }
+	public void runSimulation() {
 		
-		while (!avslutaProgram) {
-			// Programmet körs
-			if (0 ==0) {
-				avslutaProgram = true;
-				setChanged();
-				notifyObservers();
-			}
-		}
 	}
+	
+	public boolean getIo() { return io;	}
+	public double getTime() { return time; }
+	
+	public void setIo(boolean io) { this.io = io; }
+	public void setTime(double time) { this.time = time; }
+	
+	public void avslutaSim() { this.io = false; }
+	
+	public void update(Event e) {
+		this.setTime(e.tid);
+		setChanged();
+		notifyObservers();
+	}
+	
 }

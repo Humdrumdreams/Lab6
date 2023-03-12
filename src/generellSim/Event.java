@@ -1,22 +1,26 @@
 package Lab6.generellSim;
 
-import Lab6.snabbköp.Snabbköp;
 import Lab6.snabbköp.SnabbköpState;
+import Lab6.snabbköp.kunder.Kund;
 
 public abstract class Event {
 	
 	protected SnabbköpState state;
-	protected Snabbköp snabbköp;
+	protected double tid;
 	protected EventQueue eQ;
+	protected boolean eventState = false;
 	
-	public Event(SnabbköpState state, Snabbköp snabbköp, EventQueue eQ) {
+	public Event(SnabbköpState state, EventQueue eQ, double tid) {
 		this.state = state;
-		this.snabbköp = snabbköp;
 		this.eQ = eQ;
+		this.tid = tid;
 	}
-
-	public abstract void createEvent(double lambda, long seed, int kundID);
-	//Klassen Event måste ha en referens till kön så dessa nya framtida
-	//händelser kan lagras med övriga framtida händelser.
+	public abstract void createEvent();	
+	public abstract String getName();
+	
+	public double händelseTid() { return this.tid; }
+	public boolean getEventState() { return this.eventState; }
+	
+	public void setEventState(boolean b) { this.eventState = b; }
 	
 }
