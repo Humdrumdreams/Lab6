@@ -1,10 +1,19 @@
 package Lab6.generellSim;
 
+/**
+ * The class that represents the general list of events in a Simulator.
+ * The class will put the events in order depending on which time the
+ * event will occur. 
+ * 
+ * @author Ludvig Lidén, Botan Guzel, Sergij Wennström
+ */
+
+
 import java.util.ArrayList;
 
 public class EventQueue extends ArrayList<Event> {
 
-	public EventQueue() { super();	}
+	public EventQueue() { super();}
 	
 	public boolean addEvent(Event e) {
 		if (!e.getEventState()) {
@@ -27,10 +36,7 @@ public class EventQueue extends ArrayList<Event> {
 		return false;
 		
 	}
-	
-	
-	
-	
+		
 	public Event nästaHändelse() { return this.get(0); }
 	public void removeEvent() { this.remove(0); }
 
