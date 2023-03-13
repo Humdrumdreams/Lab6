@@ -10,7 +10,7 @@ public class SnabbköpState extends SimState{
 	private int antalKunderSomHandlat, antalKunderSomKöat,
 		kassaKöLängd, summaKöTid, summaTidLedigaKassor,
 		antalMissadeKunder, maxKassor, antalKunderIButik, 
-		antalLedigaKassor, maxKunder, totalAntalKunder;
+		antalLedigaKassor, maxKunder, totalAntalKunder, kundID;
 	
 	private KassaKöFIFO kassaKöFIFO;
 	
@@ -22,7 +22,7 @@ public class SnabbköpState extends SimState{
 	public SnabbköpState(int maxKunder, int maxKassor, double lambda, 
 			long seed, double kMin, double kMax, double pMin, double pMax) {
 		this.maxKunder = maxKunder;
-		this.maxKassor = maxKassor;
+		this.maxKassor = 5;
 		this.lambda = lambda;
 		this.seed = seed;
 		this.kMin = kMin;
@@ -30,6 +30,9 @@ public class SnabbköpState extends SimState{
 		this.pMin = pMin;
 		this.pMax = pMax;
 		this.tC = new TimeCalculations(lambda, seed, kMin, kMax, pMin, pMax);
+		this.ankomstTid = tC.calculateAnkomst(this.getTime());
+		this.plockTid = tC.calculatePlock(this.getTime());
+		this.betalningsTid = tC.calculateBetalnings(this.getTime());
 	}
 	
 	public int getAntalKunderSomHandlat() { return antalKunderSomHandlat; }
@@ -43,6 +46,7 @@ public class SnabbköpState extends SimState{
 	public int getAntalLedigaKassor() { return this.antalLedigaKassor; }
 	public int getMaxKunder() { return this.maxKunder; }
 	public int getTotalAntalKunder() { return this.totalAntalKunder; }
+	public int getKundID() { return this.kundID; }
 	public double getLambda() { return this.lambda; }
 	public double getAnkomstTid() { return this.ankomstTid; }
 	public double getPlockTid() { return this.plockTid; }
@@ -58,6 +62,8 @@ public class SnabbköpState extends SimState{
 	
 	public void setSnabbköpÖppet(boolean a) { this.snabbköpÖppet = a; }
 	public void setCurrentEvent(Event e) { this.currentEvent = e; }
+	public void setKundID(int i) { this.kundID = i; }
+	public void setKassaKöFIFO(KassaKöFIFO k) { this.kassaKöFIFO = k; }
 	
 	public void läggMissadKund() {this.antalMissadeKunder += 1; }
 	public void minskaAntalKunderIButik() { this.antalKunderIButik -= 1; }

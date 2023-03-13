@@ -79,10 +79,11 @@ public class SnabbköpView extends SimView{
 		else if (state.getCurrentEvent() instanceof Stop) { Resultat(); }
 		else {
 			System.out.println(String.format(
-					"%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %s",
+					"%.2f %s %s %s %s %s %s %s %s %s %s %s %s",
 					state.getTime(),
 					state.getCurrentEvent().getName(),
-					state.isSnabbköpÖppet() ? "S" : "Ö",
+					state.getKundID(),
+					state.isSnabbköpÖppet() ? "Ö" : "S",
 					state.getAntalLedigaKassor(),
 					state.getSummaTidLedigaKassor(),
 					state.getAntalKunderIButik(),

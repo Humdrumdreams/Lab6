@@ -20,6 +20,7 @@ public class Run extends Event {
 		this.eQ.addEvent(new Ankomst(state, eQ, state.getAnkomstTid(), this.kund));
 		state.ökaTotalAntalKunder();
 		this.setEventState(true);
+		eQ.remove(0);
 	}
 
 	@Override

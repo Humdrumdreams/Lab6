@@ -17,10 +17,15 @@ public class Sim {
 	}
 	
 	public void körHändelser() {
+		//eQ.get(0).createEvent();
+		//skV.update(ss, eQ);
 		while(ss.getIo() && !eQ.isEmpty()) {
-			for (int i = 0; i < eQ.size(); i++) {System.out.println(eQ.get(i).getName());}
-			skV.update(ss, eQ);
-			if (eQ.get(0).getEventState()) { eQ.get(0).createEvent(); eQ.remove(0); }
+			//for (int i = 0; i < eQ.size(); i++) {System.out.println(eQ.get(i).getName());}
+			eQ.get(0).createEvent();
+			sss.setTime(eQ.get(0).händelseTid());
+			eQ.remove(0);
+			skV.update(sss, eQ);
+			if (sss.getAntalKunderIButik() == 5) { break;}
 		}
 	}
 }

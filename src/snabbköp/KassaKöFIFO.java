@@ -18,7 +18,7 @@ public class KassaKöFIFO extends LinkedList<Kund>{
 	}
 	@Override
 	public boolean add(Kund e) {
-		this.add(-1, e);
+		this.add(0, e);
 		return true;
 	}
 	public Kund removeFirst() {

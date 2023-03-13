@@ -16,7 +16,7 @@ public class SimState extends Observable{
 	public double getTime() { return time; }
 	
 	public void setIo(boolean io) { this.io = io; }
-	public void setTime(double time) { this.time = time; }
+	public void setTime(double time) { this.time += time; }
 	
 	public void avslutaSim() { this.io = false; }
 	

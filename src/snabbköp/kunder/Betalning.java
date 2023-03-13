@@ -13,10 +13,11 @@ public class Betalning extends KundHändelse{
 	@Override
 	public void createEvent() {
 		state.minskaAntalKunderIButik();
-		state.ökaAntalLedigaKassor();
+		
 		state.ökaAntalKunderSomHandlat();
-		if (state.getKassaKöFIFO().size() > 0) {
-			eQ.addEvent(new Betalning(state, eQ, state.getBetalningsTid(), state.getKassaKöFIFO().getFirst()));
+		if (state.getKassaKöFIFO().isEmpty()) {
+			eQ.addEvent(new Betalning(state, eQ, state.getBetalningsTid(), kund));
+			state.ökaAntalLedigaKassor();
 		}
 	}
 

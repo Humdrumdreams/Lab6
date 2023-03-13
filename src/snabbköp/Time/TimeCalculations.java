@@ -12,7 +12,7 @@ public class TimeCalculations {
 		this.bURS = new UniformRandomStream(kMin, kMax, seed);
 	}
 	
-	public double getAnkomstTid(double currTid) { return this.xRS.next() + currTid; }
-	public double getPlockTid(double currTid) { return this.pURS.next() + currTid; }
-	public double getBetalningsTid(double currTid) { return this.bURS.next() + currTid; }
+	public double calculateAnkomst(double currTid) { return this.xRS.next() + currTid; }
+	public double calculatePlock(double currTid) { return this.pURS.next() + currTid; }
+	public double calculateBetalnings(double currTid) { return this.bURS.next() + currTid; }
 }
